@@ -19,6 +19,7 @@ function gsu() {
 }
 
 function doIt() {
+    gsu;
     sync;
 	echo "Load bash profile";
 	source ~/.bash_profile;

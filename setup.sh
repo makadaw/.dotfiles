@@ -4,12 +4,20 @@ cd "$(dirname "${BASH_SOURCE}")";
 
 # git pull origin master;
 
-function doIt() {
+function sync() {
 	rsync --exclude ".git/" \
 		--exclude ".DS_Store" \
 		--exclude "setup.sh" \
 		--exclude "README.md" \
 		-avh --no-perms . ~;
+}
+
+function gsu() {
+    echo "Sync";
+}
+
+function doIt() {
+    sync;
 	echo "Load bash profile";
 	source ~/.bash_profile;
 }
@@ -23,4 +31,6 @@ else
 		doIt;
 	fi;
 fi;
+unset sync;
+unset gsu;
 unset doIt;

@@ -18,9 +18,14 @@ function gsu() {
     git submodule update --init --recursive 
 }
 
+function bashIt() {
+    ~/.bash_it/install.sh --silent --no-modify-config
+}
+
 function doIt() {
     gsu;
     sync;
+    bashIt;
 	echo "Load bash profile";
 	source ~/.bash_profile;
 }

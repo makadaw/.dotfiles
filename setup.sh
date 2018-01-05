@@ -19,8 +19,8 @@ function gsu() {
 }
 
 function bashIt() {
-    # (sed "s|{{BASH_IT}}|$BASH_IT|" "$BASH_IT/template/bash_profile.template.bash" | tail -n +2) >> "$HOME/$CONFIG_FILE"
-    sed -i 's/{{BASH_IT}}/$HOME\/.bash_it.sh/g' .bashrc
+    local BASH_IT="$HOME/.bash_it/"
+    sed -i "s|{{BASH_IT}}|$BASH_IT|" $HOME/.bashrc
     ~/.bash_it/install.sh --silent --no-modify-config
 }
 

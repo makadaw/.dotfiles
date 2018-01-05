@@ -23,7 +23,7 @@ function bashIt() {
     sed -i "s|{{BASH_IT}}|$BASH_IT|" $HOME/.bashrc
     ~/.bash_it/install.sh --silent --no-modify-config
     # Install default parts
-    bash-it enable alias git
+    # bash-it enable alias git
 }
 
 function doIt() {

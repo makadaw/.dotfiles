@@ -25,6 +25,6 @@
 [submodule ".vim/bundle/ctrlp"]
 	path = .vim/bundle/ctrlp
 	url = https://github.com/ctrlpvim/ctrlp.vim
-[submodule "bash-it"]
-	path = bash-it
+[submodule ".bash_it"]
+	path = .bash_it
 	url = git@github.com:Bash-it/bash-it.git

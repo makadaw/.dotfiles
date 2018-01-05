@@ -15,7 +15,7 @@ function sync() {
 function gsu() {
     echo "Sync";
     git pull --rebase; 
-    git submodule foreach git pull origin master
+    git submodule update --init --recursive 
 }
 
 function doIt() {

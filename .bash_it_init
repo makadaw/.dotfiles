@@ -1,1 +1,3 @@
-bash-it enable alias git
+#!/usr/bin/env bash
+
+bashit enable alias git

@@ -30,7 +30,7 @@ function doIt() {
     sync;
     bashIt;
 	echo "Load bash profile";
-	source "$HOME/.bash_profile";
+	source "$HOME/.bashrc";
     ./.bash_it_init
 }
 

@@ -23,7 +23,6 @@ function bashIt() {
     sed -i "s|{{BASH_IT}}|$BASH_IT|" $HOME/.bashrc
     ~/.bash_it/install.sh --silent --no-modify-config
     # Install default parts
-    # bash-it enable alias git
 }
 
 function doIt() {
@@ -32,6 +31,7 @@ function doIt() {
     bashIt;
 	echo "Load bash profile";
 	source "$HOME/.bash_profile";
+    ./.bash_it_init
 }
 
 if [ "$1" == "--force" -o "$1" == "-f" ]; then

@@ -32,7 +32,7 @@ function doIt() {
     gsu;
     sync;
     bashItAll;
-	echo "Load bash profile";
+	echo "Load bash profile from $HOME/.bashrc";
 	source "$HOME/.bashrc";
 }
 

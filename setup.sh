@@ -11,6 +11,7 @@ function sync() {
 		--exclude "setup.sh" \
 		--exclude "README.md" \
         --exclude ".bash_it_init" \
+		--exclude ".bashrc.tmpl" \
 		-avh --no-perms . ~;
 }
 
@@ -22,7 +23,7 @@ function gsu() {
 
 function bashItAll() {
     local BASH_IT="$HOME/.bash_it/"
-    sed -i "s|{{BASH_IT}}|$BASH_IT|" "$HOME/.bashrc"
+    sed "s|{{BASH_IT}}|$BASH_IT|" "$(dirname "${BASH_SOURCE}")/.bashrc.tmpl" > "$HOME/.bashrc"
     ~/.bash_it/install.sh --silent --no-modify-config
     # Install default parts
 }

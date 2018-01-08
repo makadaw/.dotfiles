@@ -28,3 +28,6 @@
 [submodule ".bash_it"]
 	path = .bash_it
 	url = https://github.com/Bash-it/bash-it.git 
+[submodule ".vim/bundle/vim-surround"]
+	path = .vim/bundle/vim-surround
+	url = https://github.com/tpope/vim-surround

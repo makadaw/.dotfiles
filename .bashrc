@@ -13,8 +13,8 @@ fi
 
 # Path to the bash it configuration
 # TODO Set it on install
-# export BASH_IT="~/.bash_it"
-export BASH_IT="{{BASH_IT}}"
+export BASH_IT="~/.bash_it"
+# export BASH_IT="{{BASH_IT}}"
 
 # Lock and Load a custom theme file
 # location /.bash_it/themes/

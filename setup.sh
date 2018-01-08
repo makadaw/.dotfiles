@@ -6,6 +6,7 @@ cd "$(dirname "${BASH_SOURCE}")";
 
 function sync() {
 	rsync --exclude ".git/" \
+        --exclude ".gitmodules" \
 		--exclude ".DS_Store" \
 		--exclude "setup.sh" \
 		--exclude "README.md" \

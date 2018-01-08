@@ -9,6 +9,7 @@ function sync() {
 		--exclude ".DS_Store" \
 		--exclude "setup.sh" \
 		--exclude "README.md" \
+        --exclude ".bash_it_init" \
 		-avh --no-perms . ~;
 }
 
@@ -18,9 +19,9 @@ function gsu() {
     git submodule update --init --recursive 
 }
 
-function bashIt() {
+function bashItAll() {
     local BASH_IT="$HOME/.bash_it/"
-    sed -i "s|{{BASH_IT}}|$BASH_IT|" $HOME/.bashrc
+    sed -i "s|{{BASH_IT}}|$BASH_IT|" "$HOME/.bashrc"
     ~/.bash_it/install.sh --silent --no-modify-config
     # Install default parts
 }
@@ -28,10 +29,9 @@ function bashIt() {
 function doIt() {
     gsu;
     sync;
-    bashIt;
+    bashItAll;
 	echo "Load bash profile";
 	source "$HOME/.bashrc";
-    ./.bash_it_init
 }
 
 if [ "$1" == "--force" -o "$1" == "-f" ]; then
@@ -45,4 +45,5 @@ else
 fi;
 unset sync;
 unset gsu;
+unset bashItAll;
 unset doIt;

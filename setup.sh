@@ -23,7 +23,7 @@ function gsu() {
 
 function bashItAll() {
     local BASH_IT="$HOME/.bash_it/"
-    sed "s|{{BASH_IT}}|$BASH_IT|" "$(dirname "${BASH_SOURCE}")/.bashrc.tmpl" > "$HOME/.bashrc"
+    sed "s|{{BASH_IT}}|$BASH_IT|" .bashrc.tmpl  > "$HOME/.bashrc"
     ~/.bash_it/install.sh --silent --no-modify-config
     # Install default parts
 }

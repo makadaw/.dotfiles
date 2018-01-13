@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
-cd "$(dirname "${BASH_SOURCE}")";
+# CD to script folder
+cd "$(dirname "${BASH_SOURCE}")" || exit 1;
 
 # git pull origin master;
 
@@ -22,7 +23,7 @@ function gsu() {
 }
 
 function bashItAll() {
-    local BASH_IT="$HOME/.bash_it/"
+    local BASH_IT="$HOME/.bash_it"
     sed "s|{{BASH_IT}}|$BASH_IT|" .bashrc.tmpl  > "$HOME/.bashrc"
     ~/.bash_it/install.sh --silent --no-modify-config
     # Install default parts

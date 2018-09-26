@@ -197,3 +197,19 @@ function o() {
 function tre() {
 	tree -aC -I '.git|node_modules|bower_components' --dirsfirst "$@" | less -FRNX;
 }
+
+# Wrap command into proxy env
+function dude() {
+  proxy=$(curl -s $(scutil --proxy | grep ProxyAutoConfigURLString | awk '{ print $3 }') | grep PROXY | tail -1 | cut -d\" -f 2 | cut -d' ' -f 2)
+  export ALL_PROXY=http://$proxy
+  export http_proxy=http://$proxy
+  export https_proxy=http://$proxy
+  export HTTP_PROXY=http://$proxy
+  export HTTPS_PROXY=http://$proxy
+  ($@)
+  unset ALL_PROXY 
+  unset http_proxy
+  unset https_proxy
+  unset HTTP_PROXY
+  unset HTTPS_PROXY
+}

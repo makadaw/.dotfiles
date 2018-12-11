@@ -7,6 +7,7 @@ cd "$(dirname "${BASH_SOURCE}")" || exit 1;
 
 function sync() {
 	rsync --exclude ".git/" \
+        --exclude "fonts/" \
         --exclude ".gitmodules" \
 		--exclude ".DS_Store" \
 		--exclude "setup.sh" \
@@ -14,6 +15,12 @@ function sync() {
         --exclude ".bash_it_init" \
 		--exclude ".bashrc.tmpl" \
 		-avh --no-perms . ~;
+}
+
+function fonts() {
+    cd fonts || exit
+    ./install.sh
+    cd .. || exit
 }
 
 function gsu() {
@@ -32,6 +39,7 @@ function bashItAll() {
 function doIt() {
     gsu;
     sync;
+    fonts;
     bashItAll;
 	echo "Load bash profile from $HOME/.bashrc";
 	source "$HOME/.bashrc";
@@ -47,6 +55,7 @@ else
 	fi;
 fi;
 unset sync;
+unset fonts;
 unset gsu;
 unset bashItAll;
 unset doIt;

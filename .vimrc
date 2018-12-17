@@ -120,6 +120,11 @@ endfunction
 
 call Py3()   " default to Py3 because I try to use it when possible
 
+" Use silver search for Ack plugin
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep'
+endif
+
 " NERDtree config
 map <C-n> :NERDTreeToggle<CR>
 autocmd StdinReadPre * let s:std_in=1

@@ -1,9 +1,6 @@
 [submodule ".vim/bundle/dracula-theme"]
 	path = .vim/bundle/dracula-theme
 	url = git@github.com:dracula/vim.git
-[submodule ".vim/bundle/nerdtree"]
-	path = .vim/bundle/nerdtree
-	url = https://github.com/scrooloose/nerdtree
 [submodule ".vim/bundle/nerdtree-git-plugin"]
 	path = .vim/bundle/nerdtree-git-plugin
 	url = https://github.com/Xuyuanp/nerdtree-git-plugin

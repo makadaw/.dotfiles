@@ -104,21 +104,7 @@ set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-let g:syntastic_enable_perl_checker = 1
-
-function Py2()
-  let g:syntastic_python_python_exec = '/usr/local/bin/python2.7'
-endfunction
-
-function Py3()
-  let g:syntastic_python_python_exec = '/usr/local/bin/python3.6'
-endfunction
-
-call Py3()   " default to Py3 because I try to use it when possible
+au BufReadPost BUCK set syntax=python
 
 " Use silver search for Ack plugin
 if executable('ag')

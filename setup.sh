@@ -14,6 +14,7 @@ function sync() {
 		--exclude "README.md" \
         --exclude ".bash_it_init" \
 		--exclude ".bashrc.tmpl" \
+        --exclude ".zshrc.tmpl" \
 		-avh --no-perms . ~;
 }
 
@@ -31,7 +32,9 @@ function gsu() {
 
 function bashItAll() {
     local BASH_IT="$HOME/.bash_it"
+    local MY_ZSH="$HOME/.oh-my-zsh"
     sed "s|{{BASH_IT}}|$BASH_IT|" .bashrc.tmpl  > "$HOME/.bashrc"
+    sed "s|{{MY_ZSH}}|$MY_ZSH|" .zshrc.tmpl  > "$HOME/.zshrc"
     ~/.bash_it/install.sh --silent --no-modify-config
     # Install default parts
 }

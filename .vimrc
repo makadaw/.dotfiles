@@ -87,6 +87,17 @@ nmap <leader>l :bn<cr>
 " Move to the previous buffer
 nmap <leader>h :bp<cr>
 
+" Status line config
+set statusline=  
+set statusline+=%-10.3n\                     " buffer number  
+set statusline+=%f\                          " filename   
+set statusline+=%h%m%r%w                     " status flags  
+set statusline+=\[%{strlen(&ft)?&ft:'none'}] " file type  
+set statusline+=%=                           " right align remainder  
+set statusline+=0x%-8B                       " character value  
+set statusline+=%-14(%l,%c%V%)               " line, character  
+set statusline+=%<%P                         " file position 
+
 " PLUGINS configuration
 
 " Set smart tab for airline
@@ -98,11 +109,6 @@ let g:airline#extensions#tabline#fnamemod = ':t'
 
 " Idents display
 let g:indent_guides_enable_on_vim_startup = 1
-
-" syntastic config
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
 
 au BufReadPost BUCK set syntax=python
 

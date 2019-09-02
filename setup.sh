@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+FORCE=0
+TYPE=
 # CD to script folder
 cd "$(dirname "${BASH_SOURCE}")" || exit 1;
 
@@ -32,31 +34,63 @@ function gsu() {
 
 function bashItAll() {
     local BASH_IT="$HOME/.bash_it"
-    local MY_ZSH="$HOME/.oh-my-zsh"
     sed "s|{{BASH_IT}}|$BASH_IT|" .bashrc.tmpl  > "$HOME/.bashrc"
-    sed "s|{{MY_ZSH}}|$MY_ZSH|" .zshrc.tmpl  > "$HOME/.zshrc"
     ~/.bash_it/install.sh --silent --no-modify-config
-    # Install default parts
-}
-
-function doIt() {
-    gsu;
-    sync;
-    fonts;
-    bashItAll;
-	echo "Load bash profile from $HOME/.bashrc";
+ 	echo "Load bash profile from $HOME/.bashrc";
 	source "$HOME/.bashrc";
 }
 
-if [ "$1" == "--force" -o "$1" == "-f" ]; then
-	doIt;
+function zshItAll() {
+    local MY_ZSH="$HOME/.oh-my-zsh"
+    sed "s|{{MY_ZSH}}|$MY_ZSH|" .zshrc.tmpl  > "$HOME/.zshrc"
+}
+
+function doIt() {
+    if [ -z "$1" ]; then
+        echo "Please provide type"
+        exit 1
+    fi
+    gsu;
+    sync;
+    fonts;
+    case $1 in
+        bash )      bashItAll
+                    ;;
+        zsh )       zshItAll
+                    ;;
+        * )         echo "Use only bash or zsh"
+                    exit 1
+    esac
+}
+
+function usage() {
+    echo " [-f|--force] bash|zsh"
+}
+
+while [ "$1" != "" ]; do
+    case $1 in
+        -f | --force )          FORCE=1 
+                                ;;
+        bash )                  TYPE="bash"
+                                ;;
+        zsh )                   TYPE="zsh"
+                                ;;
+        * )                     usage
+                                exit 1
+    esac
+    shift
+done
+
+if [ "$FORCE" = "1" ]; then
+    doIt $TYPE;
 else
 	read -p "This may overwrite existing files in your home directory. Are you sure? (y/n) " -n 1;
 	echo "";
 	if [[ $REPLY =~ ^[Yy]$ ]]; then
-		doIt;
+		doIt $TYPE;
 	fi;
 fi;
+
 unset sync;
 unset fonts;
 unset gsu;

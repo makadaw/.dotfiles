@@ -16,7 +16,7 @@ set clipboard=unnamed
 set wildmenu
 " Enable line numbers
 set number
-" Dispalay syntax
+" Display syntax
 syntax on
 " Highlight current line
 set cursorline
@@ -87,7 +87,11 @@ nmap <leader>l :bn<cr>
 " Move to the previous buffer
 nmap <leader>h :bp<cr>
 
-" Status line config
+" Spell check
+set spelllang=en
+set spell
+
+" Status line configuration
 set statusline=  
 set statusline+=%-10.3n\                     " buffer number  
 set statusline+=%f\                          " filename   
@@ -101,6 +105,8 @@ set statusline+=%<%P                         " file position
 " Languages configuration
 
 autocmd FileType ruby setlocal expandtab shiftwidth=2 tabstop=2
+" Display extra column for Ale
+" let g:ale_sign_column_always = 1
 
 " PLUGINS configuration
 
@@ -110,16 +116,13 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#enabled=1
 " Show just a filename
 let g:airline#extensions#tabline#fnamemod = ':t'
+" Turn on Ale for air line
+let g:airline#extensions#ale#enabled = 1
 
 " Idents display
 let g:indent_guides_enable_on_vim_startup = 1
 
 au BufReadPost BUCK set syntax=python
-
-" Use silver search for Ack plugin
-if executable('ag')
-  let g:ackprg = 'ag --vimgrep'
-endif
 
 " NERDtree config
 map <C-n> :NERDTreeToggle<CR>

@@ -98,6 +98,10 @@ set statusline+=0x%-8B                       " character value
 set statusline+=%-14(%l,%c%V%)               " line, character  
 set statusline+=%<%P                         " file position 
 
+" Languages configuration
+
+autocmd FileType ruby setlocal expandtab shiftwidth=2 tabstop=2
+
 " PLUGINS configuration
 
 " Set smart tab for airline
@@ -119,6 +123,8 @@ endif
 
 " NERDtree config
 map <C-n> :NERDTreeToggle<CR>
+" Open NERDTree and jump to the file
+map <C-j> :NERDTreeFind<CR>
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif

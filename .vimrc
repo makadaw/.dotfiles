@@ -83,9 +83,11 @@ set encoding=utf-8
 " Set comma as a leader
 let mapleader=","
 " Move to the next buffer
-nmap <leader>l :bn<cr>
+nmap <leader>] :bn<cr>
 " Move to the previous buffer
-nmap <leader>h :bp<cr>
+nmap <leader>[ :bp<cr>
+" Close current buffer with NERDTree bug
+noremap <leader>w :bp<cr>:bd #<cr>
 
 " Spell check
 set spelllang=en

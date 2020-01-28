@@ -16,10 +16,6 @@ set clipboard=unnamed
 set wildmenu
 " Enable line numbers
 set number
-" Display syntax
-syntax on
-" Highlight current line
-set cursorline
 " Turn indent plugin
 filetype plugin indent on
 " show existing tab with 4 spaces width

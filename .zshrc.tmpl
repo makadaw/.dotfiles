@@ -74,7 +74,21 @@ plugins=(
  common-aliases
  docker
  tmux
+ kubectl
+ zsh-autosuggestions
 )
+
+# Add brew completions
+local BREW_PREFIX=""
+if type brew &>/dev/null; then
+    BREW_PREFIX=$(brew --prefix)
+fi
+if type brew &>/dev/null; then
+  FPATH=$BREW_PREFIX/share/zsh/site-functions:$FPATH
+
+  autoload -Uz compinit
+  compinit
+fi
 
 source $ZSH/oh-my-zsh.sh
 
@@ -91,6 +105,7 @@ source $ZSH/oh-my-zsh.sh
 # else
 #   export EDITOR='mvim'
 # fi
+export EDITOR='vim'
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
@@ -111,8 +126,9 @@ for file in ~/.{functions,extra}; do
 done;
 unset file;
 
-# Add bash completions from brew
-if [ -f $(brew --prefix)/etc/bash_completion.d ]; then
-. $(brew --prefix)/etc/bash_completion.d
-fi
+eval $(thefuck --alias)
 
+# Start starship if installed
+if command -v starship &> /dev/null; then
+  eval "$(starship init zsh)"
+fi

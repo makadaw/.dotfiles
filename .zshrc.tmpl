@@ -126,7 +126,9 @@ for file in ~/.{functions,extra}; do
 done;
 unset file;
 
-eval $(thefuck --alias)
+if command -v thefuck &> /dev/null; then
+  eval $(thefuck --alias)
+fi
 
 # Start starship if installed
 if command -v starship &> /dev/null; then

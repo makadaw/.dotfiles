@@ -11,11 +11,9 @@ function sync() {
 	rsync --exclude ".git/" \
         --exclude "fonts/" \
         --exclude ".gitmodules" \
-		--exclude ".DS_Store" \
-		--exclude "setup.sh" \
-		--exclude "README.md" \
-        --exclude ".bash_it_init" \
-		--exclude ".bashrc.tmpl" \
+	      --exclude ".DS_Store" \
+        --exclude "setup.sh" \
+        --exclude "README.md" \
         --exclude ".zshrc.tmpl" \
 		-avh --no-perms . ~;
 }
@@ -28,16 +26,8 @@ function fonts() {
 
 function gsu() {
     echo "Sync";
-    git pull --rebase; 
-    git submodule update --init --recursive 
-}
-
-function bashItAll() {
-    local BASH_IT="$HOME/.bash_it"
-    sed "s|{{BASH_IT}}|$BASH_IT|" .bashrc.tmpl  > "$HOME/.bashrc"
-    ~/.bash_it/install.sh --silent --no-modify-config
- 	echo "Load bash profile from $HOME/.bashrc";
-	source "$HOME/.bashrc";
+    git pull --rebase;
+    git submodule update --init --recursive
 }
 
 function zshItAll() {
@@ -46,34 +36,19 @@ function zshItAll() {
 }
 
 function doIt() {
-    if [ -z "$1" ]; then
-        echo "Please provide type"
-        exit 1
-    fi
     gsu;
     sync;
     fonts;
-    case $1 in
-        bash )      bashItAll
-                    ;;
-        zsh )       zshItAll
-                    ;;
-        * )         echo "Use only bash or zsh"
-                    exit 1
-    esac
+		zshItAll;
 }
 
 function usage() {
-    echo " [-f|--force] bash|zsh"
+    echo " [-f|--force]"
 }
 
 while [ "$1" != "" ]; do
     case $1 in
-        -f | --force )          FORCE=1 
-                                ;;
-        bash )                  TYPE="bash"
-                                ;;
-        zsh )                   TYPE="zsh"
+        -f | --force )          FORCE=1
                                 ;;
         * )                     usage
                                 exit 1
@@ -82,17 +57,17 @@ while [ "$1" != "" ]; do
 done
 
 if [ "$FORCE" = "1" ]; then
-    doIt $TYPE;
+    doIt;
 else
 	read -p "This may overwrite existing files in your home directory. Are you sure? (y/n) " -n 1;
 	echo "";
 	if [[ $REPLY =~ ^[Yy]$ ]]; then
-		doIt $TYPE;
+		doIt;
 	fi;
 fi;
 
 unset sync;
 unset fonts;
 unset gsu;
-unset bashItAll;
+unset zshItAll;
 unset doIt;
